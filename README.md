@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
 
+## Runing server with ngrock
+
+Run angular server with `ng serve --host 0.0.0.0 --disable-host-check`
+Then run ngrock with `ngrok http 4200 -host-header="localhost:4200"` and then you have a external IP
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

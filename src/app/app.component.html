@@ -1,2 +1,11 @@
+<div class="row visually-hidden-focusable justify-content-center text-center">
+  <div class="col-5">
+    <div class="alert alert-light d-inline-flex border mt-1" role="alert">
+      <a [routerLink]="[currentUrl]" [fragment]="'main'" class="alert-link"
+        >Saltar para o conteúdo principal</a
+      >
+    </div>
+  </div>
+</div>
 <app-header></app-header>
 <router-outlet></router-outlet>

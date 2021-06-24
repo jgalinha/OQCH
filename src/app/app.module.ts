@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.componen
 import { PesquisarReceitasComponent } from './pesquisar-receitas/pesquisar-receitas.component';
 import { ListarReceitasComponent } from './listar-receitas/listar-receitas.component';
 import { ReceitasFavoritasComponent } from './receitas-favoritas/receitas-favoritas.component';
+import { ReceitaComponent } from './receita/receita.component';
 
 const appRoutes: Routes = [
     {path: 'pagina-inicial', component: PaginaInicialComponent},
@@ -19,11 +21,16 @@ const appRoutes: Routes = [
     {path: '**', component: PaginaInicialComponent}
   ];
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, PaginaInicialComponent, PesquisarReceitasComponent, ListarReceitasComponent, ReceitasFavoritasComponent],
+  declarations: [AppComponent, HeaderComponent, PaginaInicialComponent, PesquisarReceitasComponent, ListarReceitasComponent, ReceitasFavoritasComponent, ReceitaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(
+      appRoutes,
+      {
+        anchorScrolling: 'enabled'
+      }),
+    HttpClientModule
   ],
   providers: [Title],
   bootstrap: [AppComponent],

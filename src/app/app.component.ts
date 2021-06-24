@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,20 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   title: string = 'O Que Comer Hoje!';
-  public constructor(private titleService: Title) {
+  currentUrl: any = '';
+
+  public constructor(private titleService: Title, router: Router) {
+    // Get the current url to use with skip to main
+    // https://dev.to/altsyset/make-your-angular-spa-accessible-16h
+    router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        if (e.url != '') {
+          this.currentUrl = e.url;
+        } else {
+          this.currentUrl = '';
+        }
+      }
+    })
 
   }
   /**
