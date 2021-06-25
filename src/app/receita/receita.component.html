@@ -1,0 +1,19 @@
+<img
+  src="{{ meal.strMealThumb }}"
+  alt="{{ meal.strMeal }} image"
+  class="card-img-top"
+/>
+<div class="card-body">
+  <h5 class="card-title">{{ meal.strMeal }}</h5>
+  <p class="card-text">Categoria: {{ meal.strCategory }}</p>
+  <p class="cart-text" *ngIf="meal.strTags">
+    Tags:
+    <span
+      class="badge bg-primary me-1"
+      *ngFor="let tag of meal.strTags.split(',')"
+      >{{ tag }}
+    </span>
+  </p>
+  <i class="bi-alarm"></i>
+  <app-ratting [idMeal]="meal.idMeal"></app-ratting>
+</div>

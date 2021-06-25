@@ -11,26 +11,36 @@ import { PesquisarReceitasComponent } from './pesquisar-receitas/pesquisar-recei
 import { ListarReceitasComponent } from './listar-receitas/listar-receitas.component';
 import { ReceitasFavoritasComponent } from './receitas-favoritas/receitas-favoritas.component';
 import { ReceitaComponent } from './receita/receita.component';
+import { ListaReceitasPorLetraComponent } from './lista-receitas-por-letra/lista-receitas-por-letra.component';
+import { RattingComponent } from './receita/ratting/ratting.component';
 
 const appRoutes: Routes = [
-    {path: 'pagina-inicial', component: PaginaInicialComponent},
-    {path: 'pesquisar-receitas', component: PesquisarReceitasComponent},
-    {path: 'listar-receitas', component: ListarReceitasComponent},
-    {path: 'receitas-favoritas', component: ReceitasFavoritasComponent},
-    {path: '', redirectTo: 'pagina-inicial', pathMatch: 'full'},
-    {path: '**', component: PaginaInicialComponent}
-  ];
+  { path: 'pagina-inicial', component: PaginaInicialComponent },
+  { path: 'pesquisar-receitas', component: PesquisarReceitasComponent },
+  { path: 'listar-receitas', component: ListarReceitasComponent },
+  { path: 'receitas-favoritas', component: ReceitasFavoritasComponent },
+  { path: '', redirectTo: 'pagina-inicial', pathMatch: 'full' },
+  { path: '**', component: PaginaInicialComponent },
+];
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, PaginaInicialComponent, PesquisarReceitasComponent, ListarReceitasComponent, ReceitasFavoritasComponent, ReceitaComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    PaginaInicialComponent,
+    PesquisarReceitasComponent,
+    ListarReceitasComponent,
+    ReceitasFavoritasComponent,
+    ReceitaComponent,
+    ListaReceitasPorLetraComponent,
+    RattingComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {
-        anchorScrolling: 'enabled'
-      }),
-    HttpClientModule
+    RouterModule.forRoot(appRoutes, {
+      anchorScrolling: 'enabled',
+    }),
+    HttpClientModule,
   ],
   providers: [Title],
   bootstrap: [AppComponent],
