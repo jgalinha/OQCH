@@ -80,3 +80,8 @@ export interface Ratting {
   idMeal: number;
   ratting: number;
 }
+
+export interface MyDB {
+  Status: any;
+  Ratting: Ratting
+}

@@ -21,6 +21,7 @@ export class MealService {
   private areasURL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   private firstLetterURl =
     'https://www.themealdb.com/api/json/v1/1/search.php?f=';
+  private mealByIdURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
 
   categories: Category[] = [];
   ingredientes: Ingredient[] = [];
@@ -31,8 +32,14 @@ export class MealService {
     this.loadCategories();
     this.loadIngredientes();
     this.loadAreas();
+  }
 
-    this.getMealByFirstLetter('t');
+  getMealById(idMeal: number): Observable<Meal> {
+    this.log('🚀 fetching meal with id ' + idMeal);
+    return this.http.get<MealsSearch>(this.mealByIdURL + idMeal).pipe(
+      tap(_ => this.log('✅ meal with id "' + idMeal + '" fetched')),
+      map(data => data.meals[0])
+    )
   }
 
   getMealByFirstLetter(letter: String): Observable<Meal[]> {

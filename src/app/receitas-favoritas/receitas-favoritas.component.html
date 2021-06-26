@@ -1,1 +1,8 @@
-<p>receitas-favoritas works!</p>
+<div class="m-5" id="main">
+  <h1 class="display-6 mb-5 text-start">Receitas favoritas</h1>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+    <div class="col" *ngFor="let meal of meals">
+      <app-receita class="card shadow-sm" [meal]="meal"></app-receita>
+    </div>
+  </div>
+</div>
