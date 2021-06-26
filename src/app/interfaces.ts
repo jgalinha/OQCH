@@ -65,15 +65,23 @@ export interface Area {
   strArea: string;
 }
 
+export interface AreaJSON {
+  meals: Area[]
+}
+
 export interface Ingredient {
   idIngredient: number;
-  strIngrediente: string;
+  strIngredient: string;
   strDescription: string;
   strType: string;
 }
 
 export interface MealsSearch {
   meals: Meal[]
+}
+
+export interface CategoriesJSON {
+  categories: Category[]
 }
 
 export interface Ratting {
@@ -84,4 +92,10 @@ export interface Ratting {
 export interface MyDB {
   Status: any;
   Ratting: Ratting
+}
+
+export interface MealFilter {
+  ingredients: Ingredient[];
+  categories: Category[];
+  areas: Area[];
 }
