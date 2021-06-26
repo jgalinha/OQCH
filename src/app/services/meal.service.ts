@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Area, Category, Ingredient, Meal, MealsSearch } from '../interfaces';
+import { Area, AreaJSON, CategoriesJSON, Category, Ingredient, Meal, MealsSearch } from '../interfaces';
 import {
   HttpClient,
   HttpHeaders,
@@ -23,15 +23,15 @@ export class MealService {
     'https://www.themealdb.com/api/json/v1/1/search.php?f=';
   private mealByIdURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
 
-  categories: Category[] = [];
-  ingredientes: Ingredient[] = [];
-  areas: Area[] = [];
+  categories!: Observable<Category[]>;
+  ingredients!: Observable<Ingredient[]>;
+  areas!: Observable<Area[]>;
 
   constructor(private http: HttpClient, private logService: LogService) {
     this.log('init');
-    this.loadCategories();
-    this.loadIngredientes();
-    this.loadAreas();
+    this.categories = this.loadCategories();
+    this.ingredients = this.loadIngredients();
+    this.areas = this.loadAreas();
   }
 
   getMealById(idMeal: number): Observable<Meal> {
@@ -56,65 +56,97 @@ export class MealService {
     );
   }
 
-  loadCategories(): Category[] {
+  loadCategories(): Observable<Category[]> {
     this.log('🚀 fetching categories');
-    this.http
-      .get<any>(this.categoriesURL)
-      .pipe(
-        tap({
-          complete: () => {
-            this.log('✅ fetch categories complete');
-          },
-        })
+    return this.http.get<CategoriesJSON>(this.categoriesURL).pipe(
+      map(data => data.categories),
+      tap({
+        complete: () => {
+          this.log('✅ fetch categories complete');
+        }},
       )
-      .subscribe((data) => {
-        for (let i = 0; i < data.categories.length; i++) {
-          const element = data.categories[i];
-          this.categories.push(element);
-        }
-      });
+    )
+  }
+
+  getCategories(): Observable<Category[]> {
     return this.categories;
   }
 
-  loadIngredientes(): Ingredient[] {
+  // loadCategories(): Category[] {
+  //   this.log('🚀 fetching categories');
+  //   this.http
+  //     .get<any>(this.categoriesURL)
+  //     .pipe(
+  //       tap({
+  //         complete: () => {
+  //           this.log('✅ fetch categories complete');
+  //         },
+  //       })
+  //     )
+  //     .subscribe((data) => {
+  //       for (let i = 0; i < data.categories.length; i++) {
+  //         const element = data.categories[i];
+  //         this.categories.push(element);
+  //       }
+  //     });
+  //   return this.categories;
+  // }
+
+  loadIngredients(): Observable<Ingredient[]> {
     this.log('🚀 fetching ingredients');
-    this.http
+    return this.http
       .get<any>(this.ingredientesURL)
       .pipe(
+        map(data => data.meals),
         tap({
           complete: () => {
             this.log('✅ fetch ingredients complete');
           },
-        })
+        }),
       )
-      .subscribe((data) => {
-        for (let i = 0; i < data.meals.length; i++) {
-          const element = data.meals[i];
-          this.ingredientes.push(element);
-        }
-      });
-    return this.ingredientes;
   }
 
-  loadAreas(): Area[] {
+  getIngredients(): Observable<Ingredient[]> {
+    return this.ingredients;
+  }
+
+
+  // loadIngredientes(): Ingredient[] {
+  //   this.log('🚀 fetching ingredients');
+  //   this.http
+  //     .get<any>(this.ingredientesURL)
+  //     .pipe(
+  //       tap({
+  //         complete: () => {
+  //           this.log('✅ fetch ingredients complete');
+  //         },
+  //       })
+  //     )
+  //     .subscribe((data) => {
+  //       for (let i = 0; i < data.meals.length; i++) {
+  //         const element = data.meals[i];
+  //         this.ingredientes.push(element);
+  //       }
+  //     });
+  //   return this.ingredientes;
+  // }
+
+  loadAreas(): Observable<Area[]> {
     this.log('🚀 fetching areas');
-    this.http
-      .get<any>(this.areasURL)
+    return this.http
+      .get<AreaJSON>(this.areasURL)
       .pipe(
+        map(data => data.meals),
         tap({
           complete: () => {
             this.log('✅ fetch areas complete');
           },
         })
       )
-      .subscribe((data) => {
-        for (let i = 0; i < data.meals.length; i++) {
-          const element = data.meals[i];
-          this.areas.push(element);
-        }
-      });
-    return this.areas;
   }
+   getAreas(): Observable<Area[]> {
+     return this.areas
+   }
 
   private log(message: string): void {
     this.logService.add(`MealService: ${message}`);
