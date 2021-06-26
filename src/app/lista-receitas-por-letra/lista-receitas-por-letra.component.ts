@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Meal } from '../interfaces';
 import { MealService } from '../services/meal.service';
 
@@ -10,22 +11,20 @@ import { MealService } from '../services/meal.service';
 export class ListaReceitasPorLetraComponent implements OnInit {
   @Input() letter!: string;
 
-  meals: Meal[] = [];
+  meals!: Observable<Meal[]>;
   subscription: any;
 
   constructor(private mealService: MealService) {}
 
-  getMealByFirstLetter(letter: string): void {
-    this.subscription = this.mealService
-      .getMealByFirstLetter(letter)
-      .subscribe((meals) => (this.meals = meals));
+  getMealByFirstLetter(letter: string): Observable<Meal[]> {
+    return this.mealService.getMealByFirstLetter(letter);
   }
 
   ngOnInit(): void {
-    this.getMealByFirstLetter(this.letter);
+    this.meals = this.getMealByFirstLetter(this.letter);
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribedd();
   }
 }
