@@ -15,7 +15,7 @@ export class ReceitasFavoritasComponent implements OnInit {
 
   getMeals():void {
     this.rattings.forEach(ratting => {
-      if (ratting.ratting > 0) {
+      if (ratting.favourite) {
         this.mealService.getMealById(ratting.idMeal).subscribe(data => {
           this.meals.push(data)
         });

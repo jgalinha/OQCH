@@ -24,6 +24,7 @@ export class IdbService {
           console.log("IndexedDB upgrade");
           db.createObjectStore("Status", { keyPath: "AppName"});
           db.createObjectStore("Ratting", { keyPath: "idMeal"});
+          db.createObjectStore("Favoutire", { keyPath: "idMeal"})
         }
       })
     )

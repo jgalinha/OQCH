@@ -87,6 +87,7 @@ export interface CategoriesJSON {
 export interface Ratting {
   idMeal: number;
   ratting: number;
+  favourite: boolean;
 }
 
 export interface MyDB {

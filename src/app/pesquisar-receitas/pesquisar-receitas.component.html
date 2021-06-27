@@ -3,7 +3,7 @@
   <form (submit)="addFilter(filter)" #filter="ngForm">
     <fieldset>
       <div class="row justify-content-center">
-        <div class="col-12 col-sm-4 mb-1">
+        <div class="col-12 col-sm mb-1">
           <select
             class="form-select"
             aria-label="select tipo de pesquisa"
@@ -14,13 +14,13 @@
             (change)="changeTipo(tipo.value)"
             #tipo
           >
-            <option selected>Escolha o tipo de pesquisa</option>
+            <option selected="selected">Escolha o tipo de pesquisa</option>
             <option value="1">Ingrediente</option>
             <option value="2">Categoria</option>
             <option value="3">País</option>
           </select>
         </div>
-        <div class="col-12 col-sm-4 mb-1">
+        <div class="col-12 col-sm mb-1">
           <input
             class="form-control"
             list="datalistOptions"
@@ -129,6 +129,7 @@
     </div>
   </form>
   <p
+    class="fw-light fs-5 text-center"
     *ngIf="
       !(
         mealFilter.areas.length > 0 ||
@@ -137,7 +138,8 @@
       )
     "
   >
-    Exprimente fazer uma pesquisa para aparecerem alguns resultados...
+    Pode procurar receitas por ingrediente, categoria ou país,<br />exprimente
+    misturar vários parâmetros!
   </p>
   <div
     class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5"

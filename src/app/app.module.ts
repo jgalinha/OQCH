@@ -14,8 +14,11 @@ import { ReceitaComponent } from './receita/receita.component';
 import { ListaReceitasPorLetraComponent } from './lista-receitas-por-letra/lista-receitas-por-letra.component';
 import { RattingComponent } from './receita/ratting/ratting.component';
 import { FormsModule } from '@angular/forms';
+import { ReceitaFullComponent } from './receita/receita-full/receita-full.component';
+import { IngredienteComponent } from './receita/receita-full/ingrediente/ingrediente.component';
 
 const appRoutes: Routes = [
+  { path: 'receita/:id', component: ReceitaFullComponent},
   { path: 'pagina-inicial', component: PaginaInicialComponent },
   { path: 'pesquisar-receitas', component: PesquisarReceitasComponent },
   { path: 'listar-receitas', component: ListarReceitasComponent },
@@ -34,6 +37,8 @@ const appRoutes: Routes = [
     ReceitaComponent,
     ListaReceitasPorLetraComponent,
     RattingComponent,
+    ReceitaFullComponent,
+    IngredienteComponent,
   ],
   imports: [
     BrowserModule,

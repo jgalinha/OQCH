@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { concat, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { Area, Category, Ingredient, Meal, MealFilter } from '../interfaces';
+import { GoogleTranslateService } from '../services/google-translate.service';
 import { LogService } from '../services/log.service';
 import { MealService } from '../services/meal.service';
 
@@ -25,7 +26,21 @@ export class PesquisarReceitasComponent implements OnInit {
   meals!: Observable<Meal[]>;
   filteredMeals: Meal[] = [];
   strict: number = 0;
+  translatedFilters = {
+    ingredients: {},
+    categories: {},
+    areas: {},
+  }
 
+  constructor(private mealService: MealService, private logService: LogService, private translateService: GoogleTranslateService) { }
+
+  translate(text: string): string{
+    let data = text;
+    this.translateService.translate(text).subscribe(result => {
+      data = result
+    });
+    return data
+  }
 
   addFilter(form: NgForm): void {
     const val = form.value.pesquisa;
@@ -53,8 +68,6 @@ export class PesquisarReceitasComponent implements OnInit {
       this.mealService.getMealsByArea(area.strArea)
       .subscribe(meals => this.addFilteredMeals(meals));
     }
-
-    console.log(this.filteredMeals)
   }
 
   addFilteredMeals(meals: Meal[]): void {
@@ -130,6 +143,12 @@ export class PesquisarReceitasComponent implements OnInit {
     this.filterTarget = filter
     if (filter === 1){
       this.ingredients = this.mealService.getIngredients();
+      this.ingredients.subscribe(result => {
+        result.forEach( data => {
+          // console.log(this.translate(data.strIngredient))
+        }
+        )
+      })
     } else if (filter === 2) {
       this.categories = this.mealService.getCategories();
     } else if (filter === 3) {
@@ -137,7 +156,6 @@ export class PesquisarReceitasComponent implements OnInit {
     }
   }
 
-  constructor(private mealService: MealService, private logService: LogService) { }
 
   ngOnInit(): void {
     this.meals = this.mealService.getAllMeals();

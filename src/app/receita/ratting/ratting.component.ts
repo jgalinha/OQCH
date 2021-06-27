@@ -14,13 +14,20 @@ export class RattingComponent implements OnInit {
   ratting: Ratting = {
     idMeal: this.idMeal,
     ratting: 0,
+    favourite: false,
   };
   fillColor: string = '#ffc107';
+  favFillColor: string = '#E31B23'
 
   constructor(private idbService: IdbService) {}
 
   ngOnInit(): void {
     this.getRatting(this.idMeal);
+  }
+
+  setFav() {
+    this.ratting.favourite = !this.ratting.favourite;
+    this.idbService.addItem('Ratting', this.ratting).subscribe();
   }
 
   setRatting(ratting: number) {
