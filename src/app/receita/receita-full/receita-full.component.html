@@ -1,0 +1,163 @@
+<div class="container pt-5">
+  <div class="row">
+    <div class="clearfix">
+      <img
+        src="{{ meal.strMealThumb }}"
+        class="
+          col-12 col-md-6
+          float-md-end
+          mb-3
+          ms-md-3
+          border border-1
+          rounded
+        "
+        alt="{{ meal.strMeal }} image"
+      />
+      <app-ratting
+        class="col-12 col-md-6 float-md-end mb-3 ms-md-3"
+        [idMeal]="meal.idMeal"
+      ></app-ratting>
+      <h1 class="display-6 pb-2">{{ meal.strMeal }}</h1>
+      <p class="lead">Ingredientes</p>
+
+      <div class="row row-cols-1 row-cols-xl-2">
+        <app-ingrediente
+          *ngIf="meal.strIngredient1"
+          [ingredient]="meal.strIngredient1"
+          [measure]="meal.strMeasure1"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient2"
+          [ingredient]="meal.strIngredient2"
+          [measure]="meal.strMeasure2"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient3"
+          [ingredient]="meal.strIngredient3"
+          [measure]="meal.strMeasure3"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient4"
+          [ingredient]="meal.strIngredient4"
+          [measure]="meal.strMeasure4"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient5"
+          [ingredient]="meal.strIngredient5"
+          [measure]="meal.strMeasure5"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient6"
+          [ingredient]="meal.strIngredient6"
+          [measure]="meal.strMeasure6"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient7"
+          [ingredient]="meal.strIngredient7"
+          [measure]="meal.strMeasure7"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient8"
+          [ingredient]="meal.strIngredient8"
+          [measure]="meal.strMeasure8"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient9"
+          [ingredient]="meal.strIngredient9"
+          [measure]="meal.strMeasure9"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient10"
+          [ingredient]="meal.strIngredient10"
+          [measure]="meal.strMeasure10"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient11"
+          [ingredient]="meal.strIngredient11"
+          [measure]="meal.strMeasure11"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient12"
+          [ingredient]="meal.strIngredient12"
+          [measure]="meal.strMeasure12"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient13"
+          [ingredient]="meal.strIngredient13"
+          [measure]="meal.strMeasure13"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient14"
+          [ingredient]="meal.strIngredient14"
+          [measure]="meal.strMeasure14"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient15"
+          [ingredient]="meal.strIngredient15"
+          [measure]="meal.strMeasure15"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient16"
+          [ingredient]="meal.strIngredient16"
+          [measure]="meal.strMeasure16"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient17"
+          [ingredient]="meal.strIngredient17"
+          [measure]="meal.strMeasure17"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient18"
+          [ingredient]="meal.strIngredient18"
+          [measure]="meal.strMeasure18"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient19"
+          [ingredient]="meal.strIngredient19"
+          [measure]="meal.strMeasure19"
+        ></app-ingrediente>
+        <app-ingrediente
+          *ngIf="meal.strIngredient20"
+          [ingredient]="meal.strIngredient20"
+          [measure]="meal.strMeasure20"
+        ></app-ingrediente>
+      </div>
+      <div>
+        <p class="card-text fw-light pt-3">
+          <b>Categoria:</b> {{ meal.strCategory }}
+        </p>
+        <p class="cart-text" *ngIf="meal.strTags">
+          Tags:
+          <span class="badge bg-primary me-1" *ngFor="let tag of tags"
+            >{{ tag }}
+          </span>
+        </p>
+      </div>
+      <div class="pt-3">
+        <p class="lead" id="main">Instruções de preparação</p>
+        <p class="fw-light">{{ meal.strInstructions }}</p>
+      </div>
+      <div class="text-end" *ngIf="meal.strYoutube">
+        <a
+          class="btn btn-outline-dark"
+          href="{{ meal.strYoutube }}"
+          target="_blank"
+        >
+          Veja no youtube
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="red"
+            class="bi bi-youtube"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

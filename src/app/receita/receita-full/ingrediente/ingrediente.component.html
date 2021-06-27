@@ -1,0 +1,10 @@
+<div *ngIf="measure.length > 1" class="ingrediente p-2">
+  <img
+    class="rounded-circle mh-100"
+    src="https://www.themealdb.com/images/ingredients/{{
+      ingredient
+    }}-Small.png"
+    alt="{{ ingredient }} image"
+  />
+  <span class="fw-light">{{ measure }} {{ ingredient }}</span>
+</div>
