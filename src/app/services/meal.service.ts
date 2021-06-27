@@ -21,23 +21,61 @@ export class MealService {
   private areasURL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   private firstLetterURl =
     'https://www.themealdb.com/api/json/v1/1/search.php?f=';
-  private mealByIdURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
+  private mealByIdURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+  private mealByIngredientURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
+  private mealByCategoryURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+  private mealByAreaURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
 
   categories!: Observable<Category[]>;
   ingredients!: Observable<Ingredient[]>;
   areas!: Observable<Area[]>;
+  meals!: Observable<Meal[]>;
 
   constructor(private http: HttpClient, private logService: LogService) {
     this.log('init');
     this.categories = this.loadCategories();
     this.ingredients = this.loadIngredients();
     this.areas = this.loadAreas();
+    this.meals = this.loadMeals();
+  }
+
+
+  getMealsByIngredient(ingredient: string): Observable<Meal[]> {
+    this.log('🚀 fetching meals by ingredient ' + ingredient);
+    return this.http.get<MealsSearch>(this.mealByIngredientURL + ingredient).pipe(
+      map(meals => meals.meals),
+      tap({
+        complete: () => this.log('✅ meals with ingredient "' + ingredient + '" fetched')
+      })
+    )
+  }
+
+  getMealsByCategory(category: string): Observable<Meal[]> {
+    this.log('🚀 fetching meals by category ' + category);
+    return this.http.get<MealsSearch>(this.mealByCategoryURL + category).pipe(
+      map(meals => meals.meals),
+      tap({
+        complete: () => this.log('✅ meals with category "' + category + '" fetched')
+      })
+    )
+  }
+
+  getMealsByArea(area: string): Observable<Meal[]> {
+    this.log('🚀 fetching meals by area ' + area);
+    return this.http.get<MealsSearch>(this.mealByAreaURL + area).pipe(
+      map(meals => meals.meals),
+      tap({
+        complete: () => this.log('✅ meals with area "' + area + '" fetched')
+      })
+    )
   }
 
   getMealById(idMeal: number): Observable<Meal> {
     this.log('🚀 fetching meal with id ' + idMeal);
     return this.http.get<MealsSearch>(this.mealByIdURL + idMeal).pipe(
-      tap(_ => this.log('✅ meal with id "' + idMeal + '" fetched')),
+      tap({
+        complete: () => this.log('✅ meal with id "' + idMeal + '" fetched')
+      }),
       map(data => data.meals[0])
     )
   }
@@ -146,6 +184,20 @@ export class MealService {
   }
    getAreas(): Observable<Area[]> {
      return this.areas
+   }
+
+   loadMeals(): Observable<Meal[]> {
+    this.log('🚀 fetching meals');
+    return this.http.get<MealsSearch>(this.firstLetterURl + "%").pipe(
+      map(meals => meals.meals),
+      tap({
+        complete: () => this.log('✅ fetch meals complete')
+      })
+    )
+   }
+
+   getAllMeals(): Observable<Meal[]> {
+     return this.meals
    }
 
   private log(message: string): void {

@@ -13,6 +13,7 @@ import { ReceitasFavoritasComponent } from './receitas-favoritas/receitas-favori
 import { ReceitaComponent } from './receita/receita.component';
 import { ListaReceitasPorLetraComponent } from './lista-receitas-por-letra/lista-receitas-por-letra.component';
 import { RattingComponent } from './receita/ratting/ratting.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'pagina-inicial', component: PaginaInicialComponent },
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
       anchorScrolling: 'enabled',
     }),
     HttpClientModule,
+    FormsModule
   ],
   providers: [Title],
   bootstrap: [AppComponent],

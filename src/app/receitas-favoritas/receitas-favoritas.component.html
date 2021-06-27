@@ -1,8 +1,14 @@
 <div class="m-5" id="main">
   <h1 class="display-6 mb-5 text-start">Receitas favoritas</h1>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5">
+  <div
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-5"
+    *ngIf="meals.length > 0"
+  >
     <div class="col" *ngFor="let meal of meals">
       <app-receita class="card shadow-sm" [meal]="meal"></app-receita>
     </div>
   </div>
+  <p *ngIf="meals.length === 0">
+    Ainda não definiu nenhuma receita como favorita
+  </p>
 </div>

@@ -35,5 +35,6 @@ export class ReceitasFavoritasComponent implements OnInit {
       this.rattings = data;
       this.getMeals();
     });
+
   }
 }
