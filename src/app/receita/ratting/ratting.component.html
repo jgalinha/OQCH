@@ -1,5 +1,5 @@
 <div class="row text-end">
-  <div class="col-6 text-start">
+  <div class="col-12 col-md-2 text-start">
     <button class="btn btn-sm p-1" (click)="setFav()">
       <div *ngIf="!ratting.favourite; else fav">
         <svg
@@ -32,7 +32,7 @@
       </ng-template>
     </button>
   </div>
-  <div class="col-6 text-end">
+  <div class="col-12 col-md-10 text-end">
     <div class="btn-group btn-group-sm" role="group" aria-label="ratting">
       <button class="btn btn-sm p-1" (click)="setRatting(1)">
         <div *ngIf="ratting.ratting > 0; else else1">
